@@ -6,6 +6,7 @@ package telas;
 
 import classes.Cliente;
 import static classes.Cliente.listaClientes;
+import classes.Estoque;
 import static classes.Estoque.estoque;
 import classes.Funcionario;
 import static classes.Funcionario.listaFuncionarios;
@@ -13,6 +14,7 @@ import classes.Gerente;
 import classes.Produto;
 import javax.swing.JOptionPane;
 import static telas.cadastarGerente.listaGerente;
+import static telas.cadastros.cadastrosFlag;
 //import static telas.cadastrarCliente.listaClientes;
 //import static telas.cadastrarFuncionario.listaFuncionarios;
 
@@ -25,7 +27,8 @@ import static telas.cadastarGerente.listaGerente;
 public class Menu extends javax.swing.JFrame {
     
     static boolean logado = false;
-    static String user;// 'gerente','funcionario','cliente'
+    static String user="anonimo";// 'gerente','funcionario','cliente'
+    Estoque estoqueLoja = new Estoque();
 
 
     /**
@@ -39,6 +42,7 @@ public class Menu extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         verificarLogin(logado, user);
         criarContasIniciais();
+        atualizarBotoes();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,10 +58,23 @@ public class Menu extends javax.swing.JFrame {
         Funcionario funcionario;
         funcionario = new Funcionario("func","000.000.000-00","func@gmail.com","func");
         listaFuncionarios.add(funcionario);
-        Cliente cliente = new Cliente("user","000.000.000-00","user@gmail.com","user","Pernambuco","10/05/1990","999-9999");
+        Cliente cliente = new Cliente("user","000.000.000-00","user@gmail.com","user","Pernambuco","10/05/1990","99999-9999");
         listaClientes.add(cliente);
+        Cliente cliente1 = new Cliente("Alberto","010.034.123-00","alberto@gmail.com","alberto","Brasília","15/12/2000","88888-8888");
+        listaClientes.add(cliente1);
+
         Produto produto1 = new Produto("Eragon","Christopher Paolini","Aventura",15.69,3,"1","Eragon se torna um cavaleiro de Dragão");
-        estoque.add(produto1);
+        estoqueLoja.addEstoque(produto1);
+        Produto produto2 = new Produto("Diario de um banana","Jeff Kiney","Comédia",10.40,5,"2","Diário de Greg Heffley");
+        estoqueLoja.addEstoque(produto2);
+        Produto produto3 = new Produto("Eldest","Christopher Paolini","Aventura",20.69,6,"3","Eragon e Murtagh lutam na campina ardente");
+        estoqueLoja.addEstoque(produto3);
+        Produto produto4 = new Produto("Brisingr","Christopher Paolini","Aventura",18.29,6,"4","Eragon treina com Oromis");
+        estoqueLoja.addEstoque(produto4);
+        Produto produto5 = new Produto("Herança","Christopher Paolini","Aventura",24.89,6,"5","Eragon luta contra o Rei Galbatorix");
+        estoqueLoja.addEstoque(produto5);
+
+
             
         }
     }
@@ -103,7 +120,54 @@ public class Menu extends javax.swing.JFrame {
                 lblLogin.setVisible(false);
             }
     }
+    public void atualizarBotoes(){
+        if(logado==true){
+            if(user.equals("")){
+            btnCliente.setText("Criar conta de Cliente");
+            btnFuncionario.setText("Área do Funcionário");
+            btnFuncionario.setEnabled(false);
+            btnGerente.setEnabled(false);
+            btnAtualizarEstoque.setEnabled(false);
+            btnVerCarrinho.setEnabled(false);
+            }
+            if(user.equals("cliente")){
+            btnCliente.setText("Área do Cliente");
+            btnFuncionario.setEnabled(false);
+            btnGerente.setEnabled(false);
+            btnAtualizarEstoque.setEnabled(false);
+            btnVerCarrinho.setEnabled(true);
+                
+                
+            }
+            if(user.equals("funcionario")){
+            btnCliente.setText("Criar conta de Cliente");
+            btnFuncionario.setEnabled(true);
+            btnFuncionario.setText("Área do Funcionário");
+            btnGerente.setEnabled(false);
+            btnAtualizarEstoque.setEnabled(true);
+            btnVerCarrinho.setEnabled(true);
+                
+            }
+            if(user.equals("gerente")){
+            btnCliente.setText("Criar conta de Cliente");
+            btnFuncionario.setEnabled(true);
+            btnFuncionario.setText("Criar Funcionário");
+            btnGerente.setEnabled(true);
+            btnGerente.setText("Área do Gerente");
+            btnAtualizarEstoque.setEnabled(true);
+            btnVerCarrinho.setEnabled(true);
 
+            }
+            
+        }else{
+            btnCliente.setText("Criar conta de Cliente");
+            btnFuncionario.setEnabled(false);
+            btnGerente.setEnabled(false);
+            btnAtualizarEstoque.setEnabled(false);
+            btnVerCarrinho.setEnabled(false);
+            
+        }
+    }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -111,7 +175,6 @@ public class Menu extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lblLogin = new javax.swing.JLabel();
-        lblBookStockManager = new javax.swing.JLabel();
         btnAtualizarEstoque = new javax.swing.JToggleButton();
         btnVerCarrinho = new javax.swing.JButton();
         btnPesquisar = new javax.swing.JButton();
@@ -120,7 +183,7 @@ public class Menu extends javax.swing.JFrame {
         btnCliente = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
         btnLogin = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         lblLogo = new javax.swing.JLabel();
         lblImagem = new javax.swing.JLabel();
 
@@ -130,79 +193,80 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu principal");
-        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo_digitalbooks03_small3.png")).getImage());
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo_128.png")).getImage());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblLogin.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        lblLogin.setForeground(new java.awt.Color(255, 0, 0));
+        lblLogin.setFont(new java.awt.Font("Old London", 1, 80)); // NOI18N
+        lblLogin.setForeground(new java.awt.Color(255, 255, 255));
         lblLogin.setText("Você entrou como cliente");
-        jPanel1.add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, -1));
+        jPanel1.add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, -10, 1060, 100));
 
-        lblBookStockManager.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        lblBookStockManager.setForeground(new java.awt.Color(255, 255, 255));
-        lblBookStockManager.setText("BookStock");
-        jPanel1.add(lblBookStockManager, new org.netbeans.lib.awtextra.AbsoluteConstraints(1580, 210, -1, -1));
-
-        btnAtualizarEstoque.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btnAtualizarEstoque.setFont(new java.awt.Font("Old London", 1, 36)); // NOI18N
         btnAtualizarEstoque.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/simbolos/business_inventory_maintenance_product_box_boxes_2326_64.png"))); // NOI18N
         btnAtualizarEstoque.setText("Atualizar Estoque");
+        btnAtualizarEstoque.setContentAreaFilled(false);
         btnAtualizarEstoque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAtualizarEstoqueActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAtualizarEstoque, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 570, 400, 130));
+        jPanel1.add(btnAtualizarEstoque, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 640, 400, 130));
 
-        btnVerCarrinho.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btnVerCarrinho.setFont(new java.awt.Font("Old London", 1, 36)); // NOI18N
         btnVerCarrinho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/simbolos/4105931-add-to-cart-buy-cart-sell-shop-shopping-cart_113919_64.png"))); // NOI18N
         btnVerCarrinho.setText("Ver carrinho");
+        btnVerCarrinho.setContentAreaFilled(false);
         btnVerCarrinho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVerCarrinhoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnVerCarrinho, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 390, 400, 130));
+        jPanel1.add(btnVerCarrinho, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 420, 400, 130));
 
-        btnPesquisar.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btnPesquisar.setFont(new java.awt.Font("Old London", 1, 36)); // NOI18N
         btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/simbolos/searchmagnifierinterfacesymbol1_79893_64.png"))); // NOI18N
         btnPesquisar.setText("Buscar Produto");
+        btnPesquisar.setContentAreaFilled(false);
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesquisarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 390, 400, 130));
+        jPanel1.add(btnPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 400, 400, 130));
 
-        btnFuncionario.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        btnFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/simbolos/technicalsupport_support_representative_person_people_man_1641_64.png"))); // NOI18N
+        btnFuncionario.setFont(new java.awt.Font("Old London", 1, 36)); // NOI18N
+        btnFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/simbolos/cavaleiro64.png"))); // NOI18N
         btnFuncionario.setText("Funcionário");
+        btnFuncionario.setContentAreaFilled(false);
         btnFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFuncionarioActionPerformed(evt);
             }
         });
-        jPanel1.add(btnFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 570, 400, 130));
+        jPanel1.add(btnFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 640, 400, 130));
 
-        btnGerente.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        btnGerente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/simbolos/customer_person_people_man_you_1625_64.png"))); // NOI18N
+        btnGerente.setFont(new java.awt.Font("Old London", 1, 36)); // NOI18N
+        btnGerente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/simbolos/rei64.png"))); // NOI18N
         btnGerente.setText("Gerente");
+        btnGerente.setContentAreaFilled(false);
         btnGerente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGerenteActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGerente, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 570, 400, 130));
+        jPanel1.add(btnGerente, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 640, 400, 130));
 
-        btnCliente.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        btnCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/simbolos/person_user_customer_man_male_man_boy_people_1687_64.png"))); // NOI18N
+        btnCliente.setFont(new java.awt.Font("Old London", 1, 36)); // NOI18N
+        btnCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/simbolos/aventureiro64.png"))); // NOI18N
         btnCliente.setText("Cliente");
+        btnCliente.setContentAreaFilled(false);
         btnCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClienteActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 390, 400, 130));
+        jPanel1.add(btnCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 400, 400, 130));
 
         btnLogout.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/simbolos/logout_90894_64.png"))); // NOI18N
@@ -228,25 +292,28 @@ public class Menu extends javax.swing.JFrame {
         });
         jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 200, 70));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Manager");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1600, 260, -1, -1));
+        jButton1.setBackground(new java.awt.Color(255, 0, 0));
+        jButton1.setFont(new java.awt.Font("Old London", 0, 48)); // NOI18N
+        jButton1.setText("Fechar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1715, 20, 160, 70));
 
-        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/livro01.png"))); // NOI18N
-        jPanel1.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1460, 0, 390, 210));
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo256.png"))); // NOI18N
+        jPanel1.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 100, -1, 250));
 
-        lblImagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/madeira-background.jpg"))); // NOI18N
-        jPanel1.add(lblImagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 1190));
+        lblImagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Telas/Menu.png"))); // NOI18N
+        jPanel1.add(lblImagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         lblImagem.getAccessibleContext().setAccessibleName("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,7 +328,9 @@ public class Menu extends javax.swing.JFrame {
         logado=false;
         user="";
         verificarLogin(logado,user);
-        JOptionPane.showMessageDialog(null,"Você acabou de sair do sistema", "Mensagem",JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(null,"Você acabou de sair do sistema", "Mensagem",JOptionPane.INFORMATION_MESSAGE);
+        atualizarBotoes();
+
         
 
     }//GEN-LAST:event_btnLogoutActionPerformed
@@ -288,15 +357,23 @@ tela.addWindowListener(new java.awt.event.WindowAdapter() {
 
         if(logado==true){
             if(user.equals("gerente") || user.equals("funcionario")){
-                JOptionPane.showMessageDialog(null,"Você tem acesso a criar nova conta de cliente","Notificação de acesso a cliente",JOptionPane.ERROR_MESSAGE);
-                new cadastrarCliente().setVisible(true);
+                //JOptionPane.showMessageDialog(null,"Você tem acesso a criar nova conta de cliente","Notificação de acesso a cliente",JOptionPane.ERROR_MESSAGE);
+                int response = JOptionPane.showConfirmDialog(null, "Gostaria de criar uma nova conta como Cliente?","Confirmação",JOptionPane.YES_NO_OPTION);
+                if(response==JOptionPane.YES_OPTION){
+                    cadastrosFlag = "cliente";
+                    new cadastros().setVisible(true);
+                }
             }else{
                 new areaCliente().setVisible(true);
             }
         }else{
-            JOptionPane.showMessageDialog(null,"Você não entrou no sistema. Crie uma nova conta como Cliente", "Mensagem",JOptionPane.PLAIN_MESSAGE);
+            int response = JOptionPane.showConfirmDialog(null, "Você não entrou no sistema. Gostaria de criar uma nova conta como Cliente?","Confirmação",JOptionPane.YES_NO_OPTION);
+            if(response==JOptionPane.YES_OPTION){
+                new cadastros().setVisible(true);
+                user="anonimo";
+            }
 
-            new cadastrarCliente().setVisible(true);
+            //new cadastrarCliente().setVisible(true);
         }
 
     }//GEN-LAST:event_btnClienteActionPerformed
@@ -313,8 +390,13 @@ tela.addWindowListener(new java.awt.event.WindowAdapter() {
         
         if(logado==true){
             if( user.equals("gerente")){
-            new cadastrarFuncionario().setVisible(true);
+                int response = JOptionPane.showConfirmDialog(null, "Gostaria de criar uma nova conta como Funcionário?","Confirmação",JOptionPane.YES_NO_OPTION);
+                if(response==JOptionPane.YES_OPTION){
+                    cadastrosFlag = "funcionario";
+                    new cadastros().setVisible(true);
+                }
             }else if(user.equals("funcionario")){
+                    //cadastrosFlag="funcionario";
                     new areaFuncionario().setVisible(true);
                     }
             else{
@@ -370,6 +452,11 @@ tela.addWindowListener(new java.awt.event.WindowAdapter() {
             }
     }//GEN-LAST:event_btnAtualizarEstoqueActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -414,11 +501,10 @@ tela.addWindowListener(new java.awt.event.WindowAdapter() {
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnVerCarrinho;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblBookStockManager;
     private javax.swing.JLabel lblImagem;
     private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblLogo;

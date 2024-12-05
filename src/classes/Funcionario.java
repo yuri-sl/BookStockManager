@@ -10,10 +10,11 @@ import java.util.ArrayList;
  *
  * @author Yuri
  */
-public class Funcionario extends Usuario{
+public class Funcionario extends Usuario implements OperadorSistema{
     private String cadastroFuncionario;
     public static  int index_func;
     public static ArrayList<Funcionario> listaFuncionarios = new ArrayList();
+    private ArrayList<Carrinho> listaCarrinhoFuncionario = new ArrayList();
 
     
     
@@ -41,6 +42,42 @@ public class Funcionario extends Usuario{
     @Override
     public String toString() {
         return "Funcionario{" + "cadastroFuncionario=" + cadastroFuncionario + '}';
+    }
+
+    @Override
+    public boolean login(String email, String senha) {
+        for(Funcionario func: listaFuncionarios){
+            if(email.equals(func.getEmail()) && senha.equals(func.getSenha())){
+                return true;
+            }
+        }return false;
+    }
+
+    @Override
+    public boolean logout() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void pesquisar(String titulo) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void consultarEmail(String cpf) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void addListaCarrinhosFuncionarios(Carrinho carrinho2) {
+        listaCarrinhoFuncionario.add(carrinho2);        
+    }
+
+    public ArrayList<Carrinho> getListaCarrinhoFuncionario() {
+        return listaCarrinhoFuncionario;
+    }
+
+    public void setListaCarrinhoFuncionario(ArrayList<Carrinho> listaCarrinhoFuncionario) {
+        this.listaCarrinhoFuncionario = listaCarrinhoFuncionario;
     }
     
     

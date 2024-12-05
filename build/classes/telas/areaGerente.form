@@ -27,6 +27,9 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="&#xc1;rea do Gerente"/>
+    <Property name="iconImage" type="java.awt.Image" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+      <Connection code="new javax.swing.ImageIcon(getClass().getResource(&quot;/imagens/simbolos/rei64.png&quot;)).getImage()" type="code"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -49,6 +52,25 @@
     <Property name="useNullLayout" type="boolean" value="false"/>
   </Layout>
   <SubComponents>
+    <Component class="javax.swing.JButton" name="btnSair">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Old London" size="48" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Sair"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSairActionPerformed"/>
+      </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="1780" y="10" width="130" height="60"/>
+        </Constraint>
+      </Constraints>
+    </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -57,7 +79,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="90" y="280" width="530" height="670"/>
+          <AbsoluteConstraints x="40" y="220" width="530" height="670"/>
         </Constraint>
       </Constraints>
 
@@ -303,7 +325,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="910" y="220" width="870" height="380"/>
+          <AbsoluteConstraints x="850" y="30" width="980" height="420"/>
         </Constraint>
       </Constraints>
 
@@ -342,9 +364,9 @@
                   <Component id="lblIdFuncionario" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="txtCodigoFuncionario" min="-2" pref="124" max="-2" attributes="0"/>
-                  <EmptySpace pref="59" max="32767" attributes="0"/>
+                  <EmptySpace pref="101" max="32767" attributes="0"/>
                   <Component id="btnBuscarFuncionario" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -377,7 +399,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="241" max="-2" attributes="0"/>
-                  <EmptySpace pref="7" max="32767" attributes="0"/>
+                  <EmptySpace pref="60" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -422,11 +444,11 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnNovoFuncionario">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="ff" red="33" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Old English Text MT" size="18" style="0"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagens/simbolos/add_icon-icons.com_74429 (2).png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Novo"/>
             <Property name="toolTipText" type="java.lang.String" value="Adicionar novo funcion&#xe1;rio"/>
@@ -443,6 +465,9 @@
             <Property name="text" type="java.lang.String" value="Buscar"/>
             <Property name="toolTipText" type="java.lang.String" value="Buscar pelo funcion&#xe1;rio"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarFuncionarioActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="ftxCPFFuncionario">
           <Properties>
@@ -460,9 +485,9 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="3" rowCount="4">
-                    <Column editable="true" title="C&#xf3;d. Funcion&#xe1;rio" type="java.lang.String"/>
-                    <Column editable="true" title="Nome" type="java.lang.String"/>
-                    <Column editable="true" title="CPF" type="java.lang.String"/>
+                    <Column editable="false" title="C&#xf3;d. Funcion&#xe1;rio" type="java.lang.String"/>
+                    <Column editable="false" title="Nome" type="java.lang.String"/>
+                    <Column editable="false" title="CPF" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Tabela com os dados de funcion&#xe1;rios"/>
@@ -489,16 +514,19 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblControleFuncionariosMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JButton" name="btnSalvarFuncionario">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="ff" red="0" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Old English Text MT" size="18" style="0"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagens/simbolos/Save_37110.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Salvar"/>
             <Property name="toolTipText" type="java.lang.String" value="Salvar dados do funcion&#xe1;rio"/>
@@ -509,15 +537,18 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnExcluirFuncionario">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="66" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Old English Text MT" size="18" style="0"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagens/simbolos/delete_4219.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Excluir"/>
             <Property name="toolTipText" type="java.lang.String" value="excluir funcion&#xe1;rio"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluirFuncionarioActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblControleFuncionarios">
           <Properties>
@@ -537,7 +568,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="840" y="660" width="940" height="390"/>
+          <AbsoluteConstraints x="780" y="520" width="990" height="450"/>
         </Constraint>
       </Constraints>
 
@@ -556,7 +587,10 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane3" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jScrollPane3" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="lblControleClientes" min="-2" max="-2" attributes="0"/>
@@ -574,11 +608,11 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txtCodCliente" min="-2" pref="173" max="-2" attributes="0"/>
-                          <EmptySpace pref="59" max="32767" attributes="0"/>
+                          <EmptySpace pref="77" max="32767" attributes="0"/>
                           <Component id="btnBuscarCliente" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -603,7 +637,7 @@
                       <Component id="btnExluirCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jScrollPane3" pref="272" max="32767" attributes="0"/>
+                  <Component id="jScrollPane3" pref="332" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -655,14 +689,23 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnNovoCliente">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="ff" red="33" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Old English Text MT" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Novo"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNovoClienteActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnSalvarCliente">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="ff" red="0" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Old English Text MT" size="18" style="0"/>
             </Property>
@@ -674,11 +717,17 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnExluirCliente">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="66" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Old English Text MT" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Excluir"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExluirClienteActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane3">
 
@@ -688,11 +737,11 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="5" rowCount="4">
-                    <Column editable="true" title="C&#xf3;digo Cliente" type="java.lang.String"/>
-                    <Column editable="true" title="Nome" type="java.lang.String"/>
-                    <Column editable="true" title="CPF" type="java.lang.String"/>
-                    <Column editable="true" title="Data Nascimento" type="java.lang.String"/>
-                    <Column editable="true" title="Endere&#xe7;o" type="java.lang.String"/>
+                    <Column editable="false" title="C&#xf3;digo Cliente" type="java.lang.String"/>
+                    <Column editable="false" title="Nome" type="java.lang.String"/>
+                    <Column editable="false" title="CPF" type="java.lang.String"/>
+                    <Column editable="false" title="Data Nascimento" type="java.lang.String"/>
+                    <Column editable="false" title="Endere&#xe7;o" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -743,7 +792,7 @@
     <Component class="javax.swing.JLabel" name="lblBackground">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/imagens/&#xc1;reaGerente.png"/>
+          <Image iconType="3" name="/imagens/Telas/&#xc1;reaGerente.png"/>
         </Property>
       </Properties>
       <Constraints>

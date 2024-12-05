@@ -10,16 +10,17 @@ import java.util.ArrayList;
  *
  * @author Yuri
  */
-public class Cliente extends Usuario{
+public class Cliente extends Usuario implements OperadorSistema{
     //A classe de cliente herda de funcionário
     
     //Declaração de atributos privados para o cliente
     private String endereco;
     private String dataNascimento;
     private String celular;
-    private ArrayList carrinho;
     private String idCliente;
     public static ArrayList<Cliente> listaClientes = new ArrayList();
+    public ArrayList<Carrinho> listaCarrinho = new ArrayList();
+
 
     public static  int index_cliente;
     
@@ -66,14 +67,6 @@ public class Cliente extends Usuario{
         this.celular = celular;
     }
 
-    public ArrayList getCarrinho() {
-        return carrinho;
-    }
-
-    public void setCarrinho(ArrayList carrinho) {
-        this.carrinho = carrinho;
-    }
-
     public Cliente() {
     }
 
@@ -95,6 +88,43 @@ public class Cliente extends Usuario{
     
     public static int getIndex_cliente() {
         return index_cliente;
+    }
+    
+    
+
+    public ArrayList<Carrinho> getListaCarrinho() {
+        return listaCarrinho;
+    }
+
+
+    public void addCarrinhoLista(Carrinho carrinho){
+        listaCarrinho.add(carrinho);
+    }
+
+    @Override
+    public boolean login(String email, String senha) {
+        for(Cliente pessoa : listaClientes){
+            if(email.equals(pessoa.email) && senha.equals(pessoa.senha)){
+            return true;
+        }
+        }
+        return false;
+                
+    }
+
+    @Override
+    public boolean logout() {
+        return false;
+    }
+
+    @Override
+    public void pesquisar(String titulo) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void consultarEmail(String cpf) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     

@@ -25,4 +25,7 @@ public class Estoque {
     public void removeEstoque(Produto produto){
         estoque.remove(produto);
     }
+    public int retornarTamanhoEstoque(){
+        return estoque.size();
+    }
 }

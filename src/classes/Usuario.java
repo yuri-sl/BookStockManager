@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author Yuri
  */
-abstract class Usuario {
+public abstract class Usuario {
     //Definição da classe abstrata Usuário
     
     //Definição de atributos protegidos para a classe abstrata usuário
@@ -19,7 +19,14 @@ abstract class Usuario {
     protected String email;
     protected String senha;
     static ArrayList<Cliente> listaClientes = new ArrayList(); // Definição de um ArrayList para Clientes
-    static ArrayList<Carrinho> historicoCarrinhos = new ArrayList();
+    public static ArrayList<Carrinho> historicoCarrinhos = new ArrayList();
+    public ArrayList<Carrinho> listaCarrinho = new ArrayList();
+    private Carrinho carrinho;
+    public static boolean usuario_logado = false;
+    public static String usuario_tipo ="";
+    
+    
+
     
     public Usuario(){
         this.listaClientes = new ArrayList();
@@ -84,6 +91,10 @@ abstract class Usuario {
             System.out.println("Senha atualizada com sucesso!");
             
         }
+    }
+
+    public ArrayList<Carrinho> getListaCarrinho() {
+        return listaCarrinho;
     }
     
     

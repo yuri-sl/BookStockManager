@@ -7,8 +7,10 @@ package telas;
 import static classes.Cliente.listaClientes;
 import static classes.Funcionario.listaFuncionarios;
 import classes.Gerente;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static telas.cadastarGerente.listaGerente;
+import static telas.cadastros.cadastrosFlag;
 
 /**
  *
@@ -108,6 +110,7 @@ public class areaGerente extends javax.swing.JFrame {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        btnSair = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         lblNomeGerente = new javax.swing.JLabel();
         lblCPFGerente = new javax.swing.JLabel();
@@ -168,7 +171,18 @@ public class areaGerente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Área do Gerente");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/simbolos/rei64.png")).getImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnSair.setBackground(new java.awt.Color(255, 0, 0));
+        btnSair.setFont(new java.awt.Font("Old London", 0, 48)); // NOI18N
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(1780, 10, 130, 60));
 
         jPanel1.setBackground(new java.awt.Color(211, 181, 143));
 
@@ -323,7 +337,7 @@ public class areaGerente extends javax.swing.JFrame {
                 .addGap(102, 102, 102))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 530, 670));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 530, 670));
 
         jPanel2.setBackground(new java.awt.Color(211, 181, 143));
 
@@ -345,8 +359,8 @@ public class areaGerente extends javax.swing.JFrame {
             }
         });
 
+        btnNovoFuncionario.setBackground(new java.awt.Color(51, 255, 153));
         btnNovoFuncionario.setFont(new java.awt.Font("Old English Text MT", 0, 18)); // NOI18N
-        btnNovoFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/simbolos/add_icon-icons.com_74429 (2).png"))); // NOI18N
         btnNovoFuncionario.setText("Novo");
         btnNovoFuncionario.setToolTipText("Adicionar novo funcionário");
         btnNovoFuncionario.addActionListener(new java.awt.event.ActionListener() {
@@ -358,6 +372,11 @@ public class areaGerente extends javax.swing.JFrame {
         btnBuscarFuncionario.setFont(new java.awt.Font("Old English Text MT", 0, 18)); // NOI18N
         btnBuscarFuncionario.setText("Buscar");
         btnBuscarFuncionario.setToolTipText("Buscar pelo funcionário");
+        btnBuscarFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarFuncionarioActionPerformed(evt);
+            }
+        });
 
         try {
             ftxCPFFuncionario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
@@ -380,12 +399,24 @@ public class areaGerente extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         tblControleFuncionarios.setToolTipText("Tabela com os dados de funcionários");
+        tblControleFuncionarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblControleFuncionariosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblControleFuncionarios);
         if (tblControleFuncionarios.getColumnModel().getColumnCount() > 0) {
             tblControleFuncionarios.getColumnModel().getColumn(0).setPreferredWidth(3);
@@ -393,8 +424,8 @@ public class areaGerente extends javax.swing.JFrame {
             tblControleFuncionarios.getColumnModel().getColumn(2).setPreferredWidth(14);
         }
 
+        btnSalvarFuncionario.setBackground(new java.awt.Color(0, 255, 0));
         btnSalvarFuncionario.setFont(new java.awt.Font("Old English Text MT", 0, 18)); // NOI18N
-        btnSalvarFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/simbolos/Save_37110.png"))); // NOI18N
         btnSalvarFuncionario.setText("Salvar");
         btnSalvarFuncionario.setToolTipText("Salvar dados do funcionário");
         btnSalvarFuncionario.addActionListener(new java.awt.event.ActionListener() {
@@ -403,10 +434,15 @@ public class areaGerente extends javax.swing.JFrame {
             }
         });
 
+        btnExcluirFuncionario.setBackground(new java.awt.Color(102, 102, 102));
         btnExcluirFuncionario.setFont(new java.awt.Font("Old English Text MT", 0, 18)); // NOI18N
-        btnExcluirFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/simbolos/delete_4219.png"))); // NOI18N
         btnExcluirFuncionario.setText("Excluir");
         btnExcluirFuncionario.setToolTipText("excluir funcionário");
+        btnExcluirFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirFuncionarioActionPerformed(evt);
+            }
+        });
 
         lblControleFuncionarios.setFont(new java.awt.Font("Old English Text MT", 1, 48)); // NOI18N
         lblControleFuncionarios.setText("Controle de funcionários");
@@ -444,9 +480,9 @@ public class areaGerente extends javax.swing.JFrame {
                 .addComponent(lblIdFuncionario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCodigoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addComponent(btnBuscarFuncionario)
-                .addGap(15, 15, 15))
+                .addGap(83, 83, 83))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -472,10 +508,10 @@ public class areaGerente extends javax.swing.JFrame {
                     .addComponent(btnExcluirFuncionario))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 220, 870, 380));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 30, 980, 420));
 
         jPanel3.setBackground(new java.awt.Color(211, 181, 143));
 
@@ -494,9 +530,16 @@ public class areaGerente extends javax.swing.JFrame {
         btnBuscarCliente.setFont(new java.awt.Font("Old English Text MT", 0, 18)); // NOI18N
         btnBuscarCliente.setText("Buscar");
 
+        btnNovoCliente.setBackground(new java.awt.Color(51, 255, 153));
         btnNovoCliente.setFont(new java.awt.Font("Old English Text MT", 0, 18)); // NOI18N
         btnNovoCliente.setText("Novo");
+        btnNovoCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoClienteActionPerformed(evt);
+            }
+        });
 
+        btnSalvarCliente.setBackground(new java.awt.Color(0, 255, 0));
         btnSalvarCliente.setFont(new java.awt.Font("Old English Text MT", 0, 18)); // NOI18N
         btnSalvarCliente.setText("Salvar");
         btnSalvarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -505,8 +548,14 @@ public class areaGerente extends javax.swing.JFrame {
             }
         });
 
+        btnExluirCliente.setBackground(new java.awt.Color(102, 102, 102));
         btnExluirCliente.setFont(new java.awt.Font("Old English Text MT", 0, 18)); // NOI18N
         btnExluirCliente.setText("Excluir");
+        btnExluirCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExluirClienteActionPerformed(evt);
+            }
+        });
 
         tblControleClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -522,9 +571,16 @@ public class areaGerente extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane3.setViewportView(tblControleClientes);
@@ -557,7 +613,9 @@ public class areaGerente extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane3)
+                        .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblControleClientes)
@@ -573,9 +631,9 @@ public class areaGerente extends javax.swing.JFrame {
                                 .addComponent(lblCodigoCliente)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                        .addComponent(btnBuscarCliente)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                        .addComponent(btnBuscarCliente)
+                        .addGap(38, 38, 38))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -596,12 +654,12 @@ public class areaGerente extends javax.swing.JFrame {
                     .addComponent(btnSalvarCliente)
                     .addComponent(btnExluirCliente))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 660, 940, 390));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 520, 990, 450));
 
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ÁreaGerente.png"))); // NOI18N
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Telas/ÁreaGerente.png"))); // NOI18N
         getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 1920, 1140));
 
         pack();
@@ -622,9 +680,17 @@ public class areaGerente extends javax.swing.JFrame {
     private void btnSalvarGerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarGerenteActionPerformed
         // TODO add your handling code here:
         disableGerenteFields();
+        Gerente gerente1 = listaGerente.get(0);
+        gerente1.setNome(txtNomeGerente.getText());
+        gerente1.setCPF(ftxCPFGerente.getText());
+        gerente1.setEmail(txtEmailGerente.getText());
+        gerente1.setSenha(txtSenhaGerente.getText());
+        gerente1.setCadastroGerente(txtIdGerente.getText());
         btnAlterarGerente.setEnabled(true);
         btnSalvarGerente.setEnabled(false);
         btnCancelarGerente.setEnabled(false);
+                JOptionPane.showMessageDialog(null, "Dados atualizados com sucesso!", "Atualização de dados", JOptionPane.INFORMATION_MESSAGE);
+
     }//GEN-LAST:event_btnSalvarGerenteActionPerformed
 
     private void btnCancelarGerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarGerenteActionPerformed
@@ -641,18 +707,21 @@ public class areaGerente extends javax.swing.JFrame {
         disableControleFuncionariosFields();
         disableControleFuncionariosButtons();
         btnNovoFuncionario.setEnabled(true);
-        
+        JOptionPane.showMessageDialog(null, "Dados atualizados com sucesso!", "Atualização de dados", JOptionPane.INFORMATION_MESSAGE);
+
         carregarTabelaFuncionario();
+
         //btnPesquisarFuncionario.setEnabled(true);
     }//GEN-LAST:event_btnSalvarFuncionarioActionPerformed
 
     private void btnNovoFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoFuncionarioActionPerformed
         // TODO add your handling code here:
         //enableControleFuncionariosFields();
+        cadastrosFlag="funcionario";
         disableControleFuncionariosButtons();
         btnSalvarFuncionario.setEnabled(true);
         //btnCancelarFuncionario.setEnabled(true);
-        new cadastrarFuncionario().setVisible(true);
+        new cadastros().setVisible(true);
     }//GEN-LAST:event_btnNovoFuncionarioActionPerformed
 
     private void txtCodigoFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoFuncionarioActionPerformed
@@ -661,8 +730,61 @@ public class areaGerente extends javax.swing.JFrame {
 
     private void btnSalvarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarClienteActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Dados atualizados com sucesso!", "Atualização de dados", JOptionPane.INFORMATION_MESSAGE);
+
         carregarTabelaCliente();
     }//GEN-LAST:event_btnSalvarClienteActionPerformed
+
+    private void btnExluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExluirClienteActionPerformed
+        // TODO add your handling code here:
+        int i = tblControleClientes.getSelectedRow();
+        
+                if (i>=0 && i<listaClientes.size()){
+            
+            listaClientes.remove(i);  
+            
+        }
+    carregarTabelaCliente();
+        
+        
+    
+    }//GEN-LAST:event_btnExluirClienteActionPerformed
+
+    private void btnExcluirFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirFuncionarioActionPerformed
+        // TODO add your handling code here:
+        
+                int i = tblControleClientes.getSelectedRow();
+        
+                if (i>=0 && i<listaFuncionarios.size()){
+            
+            listaFuncionarios.remove(i);  
+            
+        }
+    carregarTabelaFuncionario();
+    }//GEN-LAST:event_btnExcluirFuncionarioActionPerformed
+
+    private void btnNovoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoClienteActionPerformed
+        // TODO add your handling code here:
+        cadastrosFlag="cliente";
+        new cadastros().setVisible(true);
+        btnSalvarCliente.setEnabled(true);
+
+    }//GEN-LAST:event_btnNovoClienteActionPerformed
+
+    private void tblControleFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblControleFuncionariosMouseClicked
+        // TODO add your handling code here:
+        
+        btnExcluirFuncionario.setEnabled(true);
+    }//GEN-LAST:event_tblControleFuncionariosMouseClicked
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnBuscarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarFuncionarioActionPerformed
+        // TODO add your handling code here:  
+    }//GEN-LAST:event_btnBuscarFuncionarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -781,6 +903,7 @@ public class areaGerente extends javax.swing.JFrame {
     private javax.swing.JButton btnExluirCliente;
     private javax.swing.JButton btnNovoCliente;
     private javax.swing.JButton btnNovoFuncionario;
+    private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvarCliente;
     private javax.swing.JButton btnSalvarFuncionario;
     private javax.swing.JButton btnSalvarGerente;
