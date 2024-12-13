@@ -18,10 +18,9 @@ public class cadastrarCliente extends javax.swing.JFrame {
      */
     public cadastrarCliente() {
         initComponents();
-        
+        getRootPane().setDefaultButton(btnSalvarCliente);
 
         setLocationRelativeTo(null);
-        lblTeste.setVisible(false);
         
     }
     
@@ -62,8 +61,6 @@ public class cadastrarCliente extends javax.swing.JFrame {
         ftxCPFCliente = new javax.swing.JFormattedTextField();
         btnCancelarCliente = new javax.swing.JButton();
         btnSalvarCliente = new javax.swing.JButton();
-        lblTeste = new javax.swing.JLabel();
-        btnVerify = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Cliente");
@@ -140,15 +137,6 @@ public class cadastrarCliente extends javax.swing.JFrame {
             }
         });
 
-        lblTeste.setText("LabelDeTeste");
-
-        btnVerify.setText("Verify");
-        btnVerify.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerifyActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -197,12 +185,6 @@ public class cadastrarCliente extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(235, 235, 235)
                         .addComponent(jLabel1)))
-                .addContainerGap(37, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblTeste)
-                    .addComponent(btnVerify))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -230,13 +212,10 @@ public class cadastrarCliente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSenhaCliente)
                     .addComponent(txtSenhaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addComponent(lblTeste)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelarCliente)
-                    .addComponent(btnSalvarCliente)
-                    .addComponent(btnVerify))
+                    .addComponent(btnSalvarCliente))
                 .addGap(37, 37, 37))
         );
 
@@ -244,13 +223,17 @@ public class cadastrarCliente extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(276, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(184, 184, 184))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(286, Short.MAX_VALUE))
         );
 
         pack();
@@ -258,7 +241,7 @@ public class cadastrarCliente extends javax.swing.JFrame {
 
     private void btnSalvarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarClienteActionPerformed
         // TODO add your handling code here:
-        
+        boolean jaExiste = false;
         if (txtNomeCliente.getText().equals("") || ftxCPFCliente.getText().equals("") ||
             ftxDataCliente.getText().equals("") || txtEnderecoCliente.getText().equals("")
                 || txtSenhaCliente.getText().equals("")|| txtEmailCliente.getText().equals("")
@@ -273,28 +256,28 @@ public class cadastrarCliente extends javax.swing.JFrame {
         String email = txtEmailCliente.getText();
         String telefone = ftxTelefoneCliente.getText();
         
+        for(Cliente pessoa : listaClientes){
+            if(pessoa.getEmail().equals(email)){
+                jaExiste=true;
+                JOptionPane.showMessageDialog(null, "Já existe um cliente cadastrado com esse Email!", "Error ao criar conta", JOptionPane.ERROR_MESSAGE);
+                break;
+            }else{
+                
+            }
+        }
+        if(!jaExiste){
         Cliente cliente = new Cliente(nome,cpf,email,senha,endereco,nascimentoCliente,telefone);
         listaClientes.add(cliente);
         clearClienteInfo();
         JOptionPane.showMessageDialog(null,"Cliente criado com sucesso!", "Mensagem",JOptionPane.PLAIN_MESSAGE);
         this.setVisible(false);
         }
+        }
     }//GEN-LAST:event_btnSalvarClienteActionPerformed
 
     private void ftxCPFClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxCPFClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ftxCPFClienteActionPerformed
-
-    private void btnVerifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerifyActionPerformed
-        // TODO add your handling code here:
-        if(listaClientes.size()>0){
-            lblTeste.setVisible(true);
-        }else{
-            lblTeste.setVisible(false);
-        }
-        
-        
-    }//GEN-LAST:event_btnVerifyActionPerformed
 
     private void btnCancelarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarClienteActionPerformed
         // TODO add your handling code here:
@@ -340,7 +323,6 @@ public class cadastrarCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelarCliente;
     private javax.swing.JButton btnSalvarCliente;
-    private javax.swing.JButton btnVerify;
     private javax.swing.JFormattedTextField ftxCPFCliente;
     private javax.swing.JFormattedTextField ftxDataCliente;
     private javax.swing.JFormattedTextField ftxTelefoneCliente;
@@ -352,7 +334,6 @@ public class cadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel lblNomeCliente;
     private javax.swing.JLabel lblSenhaCliente;
     private javax.swing.JLabel lblTelefoneCliente;
-    private javax.swing.JLabel lblTeste;
     private javax.swing.JLabel txtDataCliente;
     private javax.swing.JTextField txtEmailCliente;
     private javax.swing.JTextField txtEnderecoCliente;

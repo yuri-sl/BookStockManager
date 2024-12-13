@@ -21,7 +21,7 @@ public class cadastarGerente extends javax.swing.JFrame {
      */
     public cadastarGerente() {
         initComponents();
-        
+        getRootPane().setDefaultButton(btnSalvarGerente);
         setLocationRelativeTo(null);
         limparCampos();
     }

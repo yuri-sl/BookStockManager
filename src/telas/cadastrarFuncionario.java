@@ -26,6 +26,7 @@ public class cadastrarFuncionario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         limparCampos();
         txtCodigoFuncionario.setEnabled(false);
+        getRootPane().setDefaultButton(btnSalvarFuncionario);
     }
     public void limparCampos(){
         txtNomeFuncionario.setText("");

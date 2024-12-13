@@ -5,7 +5,9 @@
 package telas;
 
 import classes.Cliente;
+import static classes.Cliente.index_cliente;
 import static classes.Cliente.listaClientes;
+import javax.swing.JOptionPane;
 //import static telas.cadastrarCliente.listaClientes;
 
 /**
@@ -25,7 +27,9 @@ public class areaCliente extends javax.swing.JFrame {
         btnSalvarCliente.setEnabled(false);
         btnCancelarCliente.setEnabled(false);
         loadClienteFields();
-        
+        disableClienteFields();
+                this.setExtendedState(MAXIMIZED_BOTH);
+
         
     }
 
@@ -85,6 +89,8 @@ public class areaCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnCarrinhosAnteriores = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         lblDadosCliente = new javax.swing.JLabel();
         lblNomeCliente = new javax.swing.JLabel();
@@ -106,40 +112,85 @@ public class areaCliente extends javax.swing.JFrame {
         txtCPFCliente = new javax.swing.JFormattedTextField();
         lblAreaCliente = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Área do cliente");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/simbolos/aventureiro64.png")).getImage());
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblDadosCliente.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblDadosCliente.setText("meus dados");
+        btnCarrinhosAnteriores.setFont(new java.awt.Font("Old London", 0, 48)); // NOI18N
+        btnCarrinhosAnteriores.setText("Acessar Carrinhos Anteriores");
+        btnCarrinhosAnteriores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCarrinhosAnterioresActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCarrinhosAnteriores, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, 70));
 
+        btnSair.setFont(new java.awt.Font("Old London", 0, 48)); // NOI18N
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(1660, 30, 130, 60));
+
+        jPanel1.setBackground(new java.awt.Color(211, 181, 143));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblDadosCliente.setFont(new java.awt.Font("Old London", 1, 24)); // NOI18N
+        lblDadosCliente.setText("Meus Dados");
+        jPanel1.add(lblDadosCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 26, 130, 30));
+
+        lblNomeCliente.setFont(new java.awt.Font("Old London", 0, 36)); // NOI18N
         lblNomeCliente.setText("Nome");
+        jPanel1.add(lblNomeCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 80, 50));
 
+        lblCPFCliente.setFont(new java.awt.Font("Old London", 0, 36)); // NOI18N
         lblCPFCliente.setText("CPF");
+        jPanel1.add(lblCPFCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 70, 70));
 
+        lblEmailCliente.setFont(new java.awt.Font("Old London", 0, 36)); // NOI18N
         lblEmailCliente.setText("E-mail");
+        jPanel1.add(lblEmailCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 100, 50));
 
+        lblSenhaCliente.setFont(new java.awt.Font("Old London", 0, 36)); // NOI18N
         lblSenhaCliente.setText("Senha");
+        jPanel1.add(lblSenhaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 130, 50));
 
+        lblEnderecoCliente.setFont(new java.awt.Font("Old London", 0, 36)); // NOI18N
         lblEnderecoCliente.setText("Endereço");
+        jPanel1.add(lblEnderecoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 130, 50));
 
-        lblNascimentoCliente.setText("data de nascimento");
+        lblNascimentoCliente.setFont(new java.awt.Font("Old London", 0, 36)); // NOI18N
+        lblNascimentoCliente.setText("Data de nascimento");
+        jPanel1.add(lblNascimentoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 260, 50));
 
+        txtNomeCliente.setFont(new java.awt.Font("Old London", 0, 24)); // NOI18N
         txtNomeCliente.setToolTipText("Nome do cliente");
         txtNomeCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeClienteActionPerformed(evt);
             }
         });
+        jPanel1.add(txtNomeCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 560, 40));
 
+        txtEmailCliente.setFont(new java.awt.Font("Old London", 0, 24)); // NOI18N
         txtEmailCliente.setToolTipText("email cadastrado");
+        jPanel1.add(txtEmailCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 560, 40));
 
+        txtSenhaCliente.setFont(new java.awt.Font("Old London", 0, 24)); // NOI18N
         txtSenhaCliente.setToolTipText("senha do cliente");
+        jPanel1.add(txtSenhaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 550, 40));
 
+        txtEnderecoCliente.setFont(new java.awt.Font("Old London", 0, 24)); // NOI18N
         txtEnderecoCliente.setToolTipText("endereço salvo");
+        jPanel1.add(txtEnderecoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 550, 40));
 
         btnSalvarCliente.setBackground(new java.awt.Color(51, 204, 0));
-        btnSalvarCliente.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnSalvarCliente.setFont(new java.awt.Font("Old London", 1, 36)); // NOI18N
         btnSalvarCliente.setText("Salvar");
         btnSalvarCliente.setToolTipText("salvar as alterações");
         btnSalvarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -147,9 +198,10 @@ public class areaCliente extends javax.swing.JFrame {
                 btnSalvarClienteActionPerformed(evt);
             }
         });
+        jPanel1.add(btnSalvarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 730, -1, 60));
 
         btnAlterarCliente.setBackground(new java.awt.Color(255, 255, 0));
-        btnAlterarCliente.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnAlterarCliente.setFont(new java.awt.Font("Old London", 1, 36)); // NOI18N
         btnAlterarCliente.setText("Alterar");
         btnAlterarCliente.setToolTipText("alterar os dados");
         btnAlterarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -157,9 +209,10 @@ public class areaCliente extends javax.swing.JFrame {
                 btnAlterarClienteActionPerformed(evt);
             }
         });
+        jPanel1.add(btnAlterarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 730, -1, 60));
 
         btnCancelarCliente.setBackground(new java.awt.Color(255, 0, 0));
-        btnCancelarCliente.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnCancelarCliente.setFont(new java.awt.Font("Old London", 1, 36)); // NOI18N
         btnCancelarCliente.setText("Cancelar");
         btnCancelarCliente.setToolTipText("cancelar a operação");
         btnCancelarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -167,8 +220,11 @@ public class areaCliente extends javax.swing.JFrame {
                 btnCancelarClienteActionPerformed(evt);
             }
         });
+        jPanel1.add(btnCancelarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 730, -1, 60));
 
+        lblCelularCliente.setFont(new java.awt.Font("Old London", 0, 36)); // NOI18N
         lblCelularCliente.setText("Celular");
+        jPanel1.add(lblCelularCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 560, 160, 50));
 
         try {
             ftxNascimentoCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -176,6 +232,8 @@ public class areaCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         ftxNascimentoCliente.setToolTipText("data de nascimento do cliente");
+        ftxNascimentoCliente.setFont(new java.awt.Font("Old London", 0, 24)); // NOI18N
+        jPanel1.add(ftxNascimentoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 550, 50));
 
         try {
             ftxTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-####")));
@@ -183,6 +241,8 @@ public class areaCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         ftxTelefone.setToolTipText("número de contato");
+        ftxTelefone.setFont(new java.awt.Font("Old London", 0, 24)); // NOI18N
+        jPanel1.add(ftxTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 620, 560, 40));
 
         try {
             txtCPFCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
@@ -190,124 +250,20 @@ public class areaCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtCPFCliente.setToolTipText("CPF do cliente");
+        txtCPFCliente.setFont(new java.awt.Font("Old London", 0, 24)); // NOI18N
+        jPanel1.add(txtCPFCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 560, 50));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDadosCliente)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblNomeCliente)
-                                .addGap(2, 2, 2)
-                                .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblCPFCliente)
-                                .addGap(38, 38, 38)
-                                .addComponent(txtCPFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(211, 211, 211)
-                                .addComponent(lblNascimentoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ftxNascimentoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(lblEmailCliente)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                            .addGap(3, 3, 3)
-                                            .addComponent(lblSenhaCliente)))
-                                    .addComponent(lblCelularCliente))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtEmailCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(ftxTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtSenhaCliente))))
-                                .addGap(37, 37, 37)
-                                .addComponent(lblEnderecoCliente)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtEnderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(45, 45, 45))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnAlterarCliente)
-                .addGap(150, 150, 150)
-                .addComponent(btnSalvarCliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCancelarCliente)
-                .addGap(63, 63, 63))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(lblDadosCliente)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNomeCliente)
-                    .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEmailCliente)
-                    .addComponent(txtEmailCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEnderecoCliente)
-                    .addComponent(txtEnderecoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCPFCliente)
-                    .addComponent(lblSenhaCliente)
-                    .addComponent(lblNascimentoCliente)
-                    .addComponent(txtSenhaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ftxNascimentoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCPFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCelularCliente)
-                    .addComponent(ftxTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAlterarCliente)
-                    .addComponent(btnSalvarCliente)
-                    .addComponent(btnCancelarCliente))
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-
-        lblAreaCliente.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblAreaCliente.setFont(new java.awt.Font("Old London", 1, 36)); // NOI18N
         lblAreaCliente.setText("Área do Cliente");
+        jPanel1.add(lblAreaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, -1, 50));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(262, 262, 262)
-                        .addComponent(lblAreaCliente))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(32, Short.MAX_VALUE))
-            .addComponent(jSeparator1)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(lblAreaCliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        jSeparator1.setForeground(new java.awt.Color(150, 114, 69));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 610, 10));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(788, 100, 610, 810));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Telas/ÁreaCliente.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -335,11 +291,37 @@ public class areaCliente extends javax.swing.JFrame {
 
     private void btnSalvarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarClienteActionPerformed
         // TODO add your handling code here:
+        Cliente cliente = listaClientes.get(index_cliente);
+        cliente.setNome(txtNomeCliente.getText());
+        cliente.setCPF(txtCPFCliente.getText());
+        cliente.setCelular(ftxTelefone.getText());
+        cliente.setDataNascimento(ftxNascimentoCliente.getText());
+        cliente.setEmail(txtEmailCliente.getText());
+        cliente.setSenha(txtSenhaCliente.getText());
+        cliente.setEndereco(txtEnderecoCliente.getText());
+        
+        
+        
+        
+        
+        
         disableClienteFields();
         btnAlterarCliente.setEnabled(true);
         btnCancelarCliente.setEnabled(false);
         btnSalvarCliente.setEnabled(false);
+        JOptionPane.showMessageDialog(null, "Dados atualizados com sucesso!", "Atualização de dados", JOptionPane.INFORMATION_MESSAGE);
+
     }//GEN-LAST:event_btnSalvarClienteActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnCarrinhosAnterioresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarrinhosAnterioresActionPerformed
+        // TODO add your handling code here:
+        new verCarrinho().setVisible(true);
+    }//GEN-LAST:event_btnCarrinhosAnterioresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -379,9 +361,12 @@ public class areaCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarCliente;
     private javax.swing.JButton btnCancelarCliente;
+    private javax.swing.JButton btnCarrinhosAnteriores;
+    private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvarCliente;
     private javax.swing.JFormattedTextField ftxNascimentoCliente;
     private javax.swing.JFormattedTextField ftxTelefone;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblAreaCliente;

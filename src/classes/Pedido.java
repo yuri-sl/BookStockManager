@@ -6,6 +6,11 @@ public class Pedido {
     private int codRastreio;
     private Pagamento pagamento;
 
+    public Pedido() {
+    }
+    
+    
+
     public Pedido(int codPedido, int codRastreio) {
         this.codPedido = codPedido;
         this.codRastreio = codRastreio;

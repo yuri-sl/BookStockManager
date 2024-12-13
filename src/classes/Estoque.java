@@ -10,6 +10,7 @@ import java.util.ArrayList;
  *
  * @author Yuri
  */
+//Classe de estoque que serve para armazernar todos os produtos em estoque
 public class Estoque {
     public static ArrayList<Produto> estoque = new ArrayList();
     
@@ -18,11 +19,20 @@ public class Estoque {
      *
      * @param produto
      */
+    //Adicionar produto ao estoque
     public void addEstoque(Produto produto){
         estoque.add(produto);
     }
-    
+    //Remover produto do estoque
     public void removeEstoque(Produto produto){
         estoque.remove(produto);
+    }
+    //Retornar o tamanho da lista de Estoque
+    public int retornarTamanhoEstoque(){
+        return estoque.size();
+    }
+    //Limpar totalmente o estoque
+    public void limparEstoque(){
+        estoque.clear();
     }
 }

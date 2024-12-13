@@ -4,8 +4,14 @@
  */
 package telas;
 
+import classes.Cliente;
+import static classes.Cliente.listaClientes;
 import classes.Funcionario;
+import static classes.Funcionario.index_func;
 import static classes.Funcionario.listaFuncionarios;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import static telas.cadastros.cadastrosFlag;
 //import static telas.cadastrarFuncionario.listaFuncionarios;
 
 /**
@@ -25,6 +31,9 @@ public class areaFuncionario extends javax.swing.JFrame {
         btnSalvarFuncionario.setEnabled(false);
         btnCancelarFuncionario.setEnabled(false);
         loadFuncionarioFields();
+        this.setExtendedState(MAXIMIZED_BOTH);
+        carregarTabelaCliente();
+
         
         setLocationRelativeTo(null);
     }
@@ -64,6 +73,32 @@ public class areaFuncionario extends javax.swing.JFrame {
         txtSenhaFuncionario.setText(funcionario_dados.getSenha());
         txtCodigoFuncionario.setText(funcionario_dados.getCadastroFuncionario());
     }
+    
+            private void carregarTabelaCliente(){
+            DefaultTableModel modeloTabelaCliente = new DefaultTableModel(new Object[] {"Cod.Cliente","Nome","CPF","Data Nascimento","Endereço"},0);
+            
+            for(int i=0;i<listaClientes.size();i++){
+                Object linha[] = new Object[] {listaClientes.get(i).getIdCliente(),
+                                               listaClientes.get(i).getNome(),
+                                               listaClientes.get(i).getCPF(),
+                                               listaClientes.get(i).getDataNascimento(),
+                                               listaClientes.get(i).getEndereco()};
+                modeloTabelaCliente.addRow(linha);
+                
+                
+            }
+            //Tabela recebe modelo de clientes
+            tblControleClientes.setModel(modeloTabelaCliente);
+            
+            tblControleClientes.getColumnModel().getColumn(0).setPreferredWidth(3);
+            tblControleClientes.getColumnModel().getColumn(1).setPreferredWidth(50);
+            tblControleClientes.getColumnModel().getColumn(2).setPreferredWidth(14);
+            tblControleClientes.getColumnModel().getColumn(3).setPreferredWidth(10);
+            tblControleClientes.getColumnModel().getColumn(4).setPreferredWidth(100);
+
+
+            
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,6 +109,7 @@ public class areaFuncionario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnSair = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         lblDadosFuncionario = new javax.swing.JLabel();
         lblNomeFuncionario = new javax.swing.JLabel();
@@ -90,35 +126,74 @@ public class areaFuncionario extends javax.swing.JFrame {
         btnCancelarFuncionario = new javax.swing.JButton();
         btnSalvarFuncionario = new javax.swing.JButton();
         lblAreaFuncionario = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        lblControleClientes = new javax.swing.JLabel();
+        lblNomeCliente = new javax.swing.JLabel();
+        txtNomeCliente = new javax.swing.JTextField();
+        lblCPFCliente = new javax.swing.JLabel();
+        lblCodigoCliente = new javax.swing.JLabel();
+        txtCodCliente = new javax.swing.JTextField();
+        btnBuscarCliente = new javax.swing.JButton();
+        btnNovoCliente = new javax.swing.JButton();
+        btnSalvarCliente = new javax.swing.JButton();
+        btnExluirCliente = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblControleClientes = new javax.swing.JTable();
+        txtCPFCliente = new javax.swing.JFormattedTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Área do funcionário");
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/simbolos/cavaleiro64.png")).getImage());
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblDadosFuncionario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSair.setBackground(new java.awt.Color(255, 0, 0));
+        btnSair.setFont(new java.awt.Font("Old London", 0, 48)); // NOI18N
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(1650, 10, 130, 60));
+
+        jPanel1.setBackground(new java.awt.Color(211, 181, 143));
+
+        lblDadosFuncionario.setFont(new java.awt.Font("Old London", 0, 24)); // NOI18N
         lblDadosFuncionario.setText("meus dados");
 
+        lblNomeFuncionario.setFont(new java.awt.Font("Old London", 0, 36)); // NOI18N
         lblNomeFuncionario.setText("Nome");
 
+        lblCPFFuncionario.setFont(new java.awt.Font("Old London", 0, 36)); // NOI18N
         lblCPFFuncionario.setText("CPF");
 
-        lblEmailFuncionario.setText("e-mail");
+        lblEmailFuncionario.setFont(new java.awt.Font("Old London", 0, 36)); // NOI18N
+        lblEmailFuncionario.setText("Email");
 
-        lblSenhaFuncionario.setText("senha");
+        lblSenhaFuncionario.setFont(new java.awt.Font("Old London", 0, 36)); // NOI18N
+        lblSenhaFuncionario.setText("Senha");
 
+        lblCodFuncionario.setFont(new java.awt.Font("Old London", 0, 36)); // NOI18N
         lblCodFuncionario.setText("Código de Funcionário");
 
+        txtNomeFuncionario.setFont(new java.awt.Font("Old London", 0, 24)); // NOI18N
         txtNomeFuncionario.setToolTipText("Nome do funcionário");
 
+        txtCPFFuncionario.setFont(new java.awt.Font("Old London", 0, 24)); // NOI18N
         txtCPFFuncionario.setToolTipText("CPF do funcionário");
 
+        txtEmailFuncionario.setFont(new java.awt.Font("Old London", 0, 24)); // NOI18N
         txtEmailFuncionario.setToolTipText("email do funcionário");
 
+        txtSenhaFuncionario.setFont(new java.awt.Font("Old London", 0, 24)); // NOI18N
         txtSenhaFuncionario.setToolTipText("senha do funcionário");
 
+        txtCodigoFuncionario.setFont(new java.awt.Font("Old London", 0, 24)); // NOI18N
         txtCodigoFuncionario.setToolTipText("código do funcionário");
 
         btnAlterarFuncionario.setBackground(new java.awt.Color(255, 255, 0));
-        btnAlterarFuncionario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAlterarFuncionario.setFont(new java.awt.Font("Old London", 0, 36)); // NOI18N
         btnAlterarFuncionario.setText("Alterar");
         btnAlterarFuncionario.setToolTipText("Alterar algum dado");
         btnAlterarFuncionario.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +203,7 @@ public class areaFuncionario extends javax.swing.JFrame {
         });
 
         btnCancelarFuncionario.setBackground(new java.awt.Color(255, 0, 0));
-        btnCancelarFuncionario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCancelarFuncionario.setFont(new java.awt.Font("Old London", 0, 36)); // NOI18N
         btnCancelarFuncionario.setText("Cancelar");
         btnCancelarFuncionario.setToolTipText("Cancelar a operação");
         btnCancelarFuncionario.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +213,7 @@ public class areaFuncionario extends javax.swing.JFrame {
         });
 
         btnSalvarFuncionario.setBackground(new java.awt.Color(102, 255, 0));
-        btnSalvarFuncionario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSalvarFuncionario.setFont(new java.awt.Font("Old London", 0, 36)); // NOI18N
         btnSalvarFuncionario.setText("Salvar");
         btnSalvarFuncionario.setToolTipText("salvar dados");
         btnSalvarFuncionario.addActionListener(new java.awt.event.ActionListener() {
@@ -147,7 +222,7 @@ public class areaFuncionario extends javax.swing.JFrame {
             }
         });
 
-        lblAreaFuncionario.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblAreaFuncionario.setFont(new java.awt.Font("Old London", 0, 36)); // NOI18N
         lblAreaFuncionario.setText("Área do funcionário");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -155,91 +230,234 @@ public class areaFuncionario extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(267, 267, 267)
-                .addComponent(lblAreaFuncionario)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDadosFuncionario)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCPFFuncionario)
-                            .addComponent(lblNomeFuncionario)
-                            .addComponent(lblEmailFuncionario)
-                            .addComponent(lblSenhaFuncionario)
-                            .addComponent(lblCodFuncionario))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(txtCPFFuncionario, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addComponent(txtNomeFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(0, 22, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtEmailFuncionario)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(lblNomeFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(lblSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(lblEmailFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGap(6, 6, 6)
+                                                        .addComponent(txtSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addContainerGap())
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(lblCPFFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEmailFuncionario)
-                            .addComponent(txtCPFFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNomeFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(314, 314, 314))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCodigoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnAlterarFuncionario)
-                .addGap(168, 168, 168)
-                .addComponent(btnSalvarFuncionario)
-                .addGap(129, 129, 129)
-                .addComponent(btnCancelarFuncionario)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtCodigoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(btnAlterarFuncionario)
+                                    .addGap(70, 70, 70)
+                                    .addComponent(btnSalvarFuncionario)
+                                    .addGap(58, 58, 58)
+                                    .addComponent(btnCancelarFuncionario))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(lblDadosFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(lblAreaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblCodFuncionario)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(lblAreaFuncionario)
-                .addGap(26, 26, 26)
-                .addComponent(lblDadosFuncionario)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNomeFuncionario)
-                    .addComponent(txtNomeFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCPFFuncionario)
-                    .addComponent(txtCPFFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblAreaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(lblDadosFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblNomeFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEmailFuncionario)
-                    .addComponent(txtEmailFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSenhaFuncionario)
-                    .addComponent(txtSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCodFuncionario)
-                    .addComponent(txtCodigoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAlterarFuncionario)
-                    .addComponent(btnSalvarFuncionario)
-                    .addComponent(btnCancelarFuncionario))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addComponent(txtNomeFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblCPFFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCPFFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblEmailFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtEmailFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblCodFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCodigoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAlterarFuncionario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnCancelarFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSalvarFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(58, 58, 58))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 210, 540, 700));
+
+        jPanel3.setBackground(new java.awt.Color(211, 181, 143));
+
+        lblControleClientes.setFont(new java.awt.Font("Old English Text MT", 1, 36)); // NOI18N
+        lblControleClientes.setText("Controle de Clientes");
+
+        lblNomeCliente.setFont(new java.awt.Font("Old English Text MT", 0, 18)); // NOI18N
+        lblNomeCliente.setText("Nome");
+
+        lblCPFCliente.setFont(new java.awt.Font("Old English Text MT", 0, 18)); // NOI18N
+        lblCPFCliente.setText("CPF");
+
+        lblCodigoCliente.setFont(new java.awt.Font("Old English Text MT", 0, 18)); // NOI18N
+        lblCodigoCliente.setText("Código de Cliente");
+
+        btnBuscarCliente.setFont(new java.awt.Font("Old London", 0, 20)); // NOI18N
+        btnBuscarCliente.setText("Buscar");
+        btnBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarClienteActionPerformed(evt);
+            }
+        });
+
+        btnNovoCliente.setBackground(new java.awt.Color(0, 255, 204));
+        btnNovoCliente.setFont(new java.awt.Font("Old London", 0, 20)); // NOI18N
+        btnNovoCliente.setText("Novo");
+        btnNovoCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoClienteActionPerformed(evt);
+            }
+        });
+
+        btnSalvarCliente.setBackground(new java.awt.Color(51, 255, 0));
+        btnSalvarCliente.setFont(new java.awt.Font("Old London", 0, 20)); // NOI18N
+        btnSalvarCliente.setText("Salvar");
+        btnSalvarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarClienteActionPerformed(evt);
+            }
+        });
+
+        btnExluirCliente.setBackground(new java.awt.Color(102, 102, 102));
+        btnExluirCliente.setFont(new java.awt.Font("Old London", 0, 20)); // NOI18N
+        btnExluirCliente.setText("Excluir");
+        btnExluirCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExluirClienteActionPerformed(evt);
+            }
+        });
+
+        tblControleClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Código Cliente", "Nome", "CPF", "Data Nascimento", "Endereço"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tblControleClientes);
+
+        try {
+            txtCPFCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(lblNomeCliente)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblCPFCliente)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCPFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(btnNovoCliente)
+                                .addGap(78, 78, 78)
+                                .addComponent(btnSalvarCliente)
+                                .addGap(65, 65, 65)
+                                .addComponent(btnExluirCliente)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(62, 62, 62)
+                                .addComponent(btnBuscarCliente))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblCodigoCliente)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCodCliente))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(133, 133, 133)
+                        .addComponent(lblControleClientes)))
+                .addGap(12, 12, 12))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(lblControleClientes)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNomeCliente)
+                    .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCPFCliente)
+                    .addComponent(lblCodigoCliente)
+                    .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCPFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNovoCliente)
+                    .addComponent(btnSalvarCliente)
+                    .addComponent(btnExluirCliente)
+                    .addComponent(btnBuscarCliente))
+                .addGap(8, 8, 8)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
         );
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 600, 410));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Telas/ÁreaFuncionário.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -258,17 +476,78 @@ public class areaFuncionario extends javax.swing.JFrame {
         btnAlterarFuncionario.setEnabled(true);
         btnSalvarFuncionario.setEnabled(false);
         btnCancelarFuncionario.setEnabled(false);
+        loadFuncionarioFields();
         
         
     }//GEN-LAST:event_btnCancelarFuncionarioActionPerformed
 
     private void btnSalvarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarFuncionarioActionPerformed
         // TODO add your handling code here:
+        Funcionario funcionario = listaFuncionarios.get(index_func);
+        funcionario.setNome(txtNomeFuncionario.getText());
+        funcionario.setCPF(txtCPFFuncionario.getText());
+        funcionario.setEmail(txtEmailFuncionario.getText());
+        funcionario.setSenha(txtSenhaFuncionario.getText());
+        
         disableFuncionarioFields();
         btnAlterarFuncionario.setEnabled(true);
         btnSalvarFuncionario.setEnabled(false);
         btnCancelarFuncionario.setEnabled(false);
+        JOptionPane.showMessageDialog(null, "Dados atualizados com sucesso!", "Atualização de dados", JOptionPane.INFORMATION_MESSAGE);
+
     }//GEN-LAST:event_btnSalvarFuncionarioActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnNovoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoClienteActionPerformed
+        // TODO add your handling code here:
+        
+        cadastrosFlag="cliente";
+        new cadastros().setVisible(true);
+        btnSalvarCliente.setEnabled(true);
+    }//GEN-LAST:event_btnNovoClienteActionPerformed
+
+    private void btnSalvarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarClienteActionPerformed
+        // TODO add your handling code here:
+        carregarTabelaCliente();
+    }//GEN-LAST:event_btnSalvarClienteActionPerformed
+
+    private void btnExluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExluirClienteActionPerformed
+        // TODO add your handling code here:
+        int i = tblControleClientes.getSelectedRow();
+
+        if (i>=0 && i<listaClientes.size()){
+
+            listaClientes.remove(i);
+
+        }
+        carregarTabelaCliente();
+
+    }//GEN-LAST:event_btnExluirClienteActionPerformed
+
+    private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
+        // TODO add your handling code here:
+        String nomePesquisado = txtNomeCliente.getText();
+        String cpfPesquisado = txtCPFCliente.getText();
+        String codPesquisado = txtCodCliente.getText();
+        Cliente cli;
+        for(Cliente cliente : listaClientes){
+        if(cliente.getNome().equals(nomePesquisado) || 
+           cliente.getCPF().equals(cpfPesquisado) || 
+           cliente.getIdCliente().equals(codPesquisado)){
+            cli = cliente;
+        txtNomeCliente.setText(cli.getNome());
+        txtCPFCliente.setText(cli.getCPF());
+        txtCodCliente.setText(cli.getIdCliente());
+        int rowIndex = Integer.parseInt(cli.getIdCliente());
+         tblControleClientes.setRowSelectionInterval(rowIndex, rowIndex);
+            break;
+        }
+    }
+    }//GEN-LAST:event_btnBuscarClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -307,19 +586,35 @@ public class areaFuncionario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarFuncionario;
+    private javax.swing.JButton btnBuscarCliente;
     private javax.swing.JButton btnCancelarFuncionario;
+    private javax.swing.JButton btnExluirCliente;
+    private javax.swing.JButton btnNovoCliente;
+    private javax.swing.JButton btnSair;
+    private javax.swing.JButton btnSalvarCliente;
     private javax.swing.JButton btnSalvarFuncionario;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblAreaFuncionario;
+    private javax.swing.JLabel lblCPFCliente;
     private javax.swing.JLabel lblCPFFuncionario;
     private javax.swing.JLabel lblCodFuncionario;
+    private javax.swing.JLabel lblCodigoCliente;
+    private javax.swing.JLabel lblControleClientes;
     private javax.swing.JLabel lblDadosFuncionario;
     private javax.swing.JLabel lblEmailFuncionario;
+    private javax.swing.JLabel lblNomeCliente;
     private javax.swing.JLabel lblNomeFuncionario;
     private javax.swing.JLabel lblSenhaFuncionario;
+    private javax.swing.JTable tblControleClientes;
+    private javax.swing.JFormattedTextField txtCPFCliente;
     private javax.swing.JTextField txtCPFFuncionario;
+    private javax.swing.JTextField txtCodCliente;
     private javax.swing.JTextField txtCodigoFuncionario;
     private javax.swing.JTextField txtEmailFuncionario;
+    private javax.swing.JTextField txtNomeCliente;
     private javax.swing.JTextField txtNomeFuncionario;
     private javax.swing.JTextField txtSenhaFuncionario;
     // End of variables declaration//GEN-END:variables
